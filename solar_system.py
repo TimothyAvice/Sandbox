@@ -18,6 +18,10 @@ class Planet(App):
         # self.orbit = generate_ellipse()
         self.speed = speed
 
+    def build(self):
+        self.root = Builder.load_file("solar_system.kv")
+        return self.root
+
     @staticmethod
     def generate_ellipse():
         y = random.randint(1, 40)
@@ -32,9 +36,5 @@ class Planet(App):
 
     def orbit(self):
         self.root.ids.orbit.size_hint_x, self.root.ids.orbit.size_hint_y = self.generate_ellipse()
-
-    def build(self):
-        self.root = Builder.load_file("solar_system.kv")
-        return self.root
 
 Planet().run()
