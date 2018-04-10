@@ -7,6 +7,7 @@ from kivy.graphics import Color
 from kivy.lang import Builder
 from kivy.uix.widget import Widget
 from kivy.clock import Clock
+from kivy.core.window import Window
 
 class planet(Ellipse):
     def __init__(self, **kwargs):
@@ -16,22 +17,22 @@ class planet(Ellipse):
 class Display(Widget):
     def __init__(self):
         super().__init__()
-        # y = random.randint(1, 40)
-        a = random.randint(1, 40)
-        b = random.randint(1, 40)
-        for i in range(-5, 5):
-            y = math.sqrt((((a**2)*(b**2)) - ((b**2)*(i**2)))/(a**2))
-            for n in range(-5, 5):
-                x = math.sqrt((((a**2)*(b**2)) - ((a**2)*(n**2))) / (b ^ 2))
-        # for x in range(0, 10):
-        #     y = 5
-                with self.canvas:
-                    Color(1, 1, 1, 1)
-                    planet(pos=(x+400, y+400), size=(2,2))
+        Window.size = (600, 600)
+        a = random.randint(0, 300)
+        b = random.randint(0, 300)
+        for x in range(-a, a):
+            y = ((((a**2)*(b**2)) - ((b**2)*(x**2)))/(a**2))**0.5
+            self.draw_path(x, y)
+            # with self.canvas:
+            #     Color(1, 0, 1, 1)
+            #     planet(pos=(x+300, y+300), size=(2, 2))
+            #     planet(pos=(x+300, z+300), size=(2, 2))
 
-
-        # x = math.sqrt((((a^2)*(b^2)) - ((a^2)*(y^2)))/(b^2))
-        # return a, b
+    def draw_path(self, x, y):
+        with self.canvas:
+            Color(1, 0, 1, 1)
+            planet(pos=(x + 300, y + 300), size=(2, 2))
+            planet(pos=(x + 300, -y + 300), size=(2, 2))
 
     # def orbit(self):
         # self.root.ids.orbit.pos = self.generate_ellipse()
