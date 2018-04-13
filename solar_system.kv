@@ -1,2 +1,9 @@
 Display:
-    pos: (0,0)
+    orientation: 'vertical'
+    pos: 0,0
+
+    BoxLayout
+        orientation: 'vertical'
+        Button:
+            text: 'create planet'
+            on_press: root.generate_path()

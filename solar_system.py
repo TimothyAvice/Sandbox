@@ -1,5 +1,5 @@
 import random
-import math
+
 
 from kivy.app import App
 from kivy.graphics import Ellipse
@@ -8,6 +8,7 @@ from kivy.lang import Builder
 from kivy.uix.widget import Widget
 from kivy.clock import Clock
 from kivy.core.window import Window
+
 
 class planet(Ellipse):
     def __init__(self, **kwargs):
@@ -18,30 +19,48 @@ class Display(Widget):
     def __init__(self):
         super().__init__()
         Window.size = (600, 600)
-        a = random.randint(0, 300)
-        b = random.randint(0, 300)
+        self.generate_path()
+
+    def generate_path(self):
+        a = random.randint(40, 300)
+        b = random.randint(40, 300)
         for x in range(-a, a):
             y = ((((a**2)*(b**2)) - ((b**2)*(x**2)))/(a**2))**0.5
             self.draw_path(x, y)
-            # with self.canvas:
-            #     Color(1, 0, 1, 1)
-            #     planet(pos=(x+300, y+300), size=(2, 2))
-            #     planet(pos=(x+300, z+300), size=(2, 2))
+        x = random.randint(-a,a)
+        y = ((((a ** 2) * (b ** 2)) - ((b ** 2) * (x ** 2))) / (a ** 2)) ** 0.5
+        z = random.choice([y, -y])
+        self.generate_planet(x, z)
 
     def draw_path(self, x, y):
         with self.canvas:
             Color(1, 0, 1, 1)
-            planet(pos=(x + 300, y + 300), size=(2, 2))
-            planet(pos=(x + 300, -y + 300), size=(2, 2))
+            planet(pos=(x + 300, y + 300), size=(1, 1))
+            planet(pos=(x + 300, -y + 300), size=(1, 1))
 
-    # def orbit(self):
-        # self.root.ids.orbit.pos = self.generate_ellipse()
+    def generate_planet(self, x, z):
+        size = self.planet_size()
+        with self.canvas:
+            self.planet_color()
+            planet(pos=(x + (300 - (size/2)), z + (300-(size/2))), size=(size, size))
+
+    @staticmethod
+    def planet_color():
+        red = random.uniform(0.0, 1.0)
+        blue = random.uniform(0.0, 1.0)
+        green = random.uniform(0.0, 1.0)
+        return Color(red, green, blue)
+
+    @staticmethod
+    def planet_size():
+        size = random.uniform(10, 50)
+        return size
 
 
 class Planet(App):
     # AU is placeholder for distance from the sun
-    # def __init__(self, au=1, radius=20, speed=1):
-    #     super().__init__()
+    def __init__(self, au=1, radius=20, speed=1):
+        super().__init__()
     #     self.au = au
     #     self.radius = radius
     #     # self.orbit = generate_ellipse()
@@ -51,5 +70,6 @@ class Planet(App):
     def build(self):
         self.root = Builder.load_file("solar_system.kv")
         return self.root
+
 
 Planet().run()
