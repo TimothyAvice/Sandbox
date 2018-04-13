@@ -19,11 +19,17 @@ class Display(Widget):
     def __init__(self):
         super().__init__()
         Window.size = (600, 600)
+        self.generate_sun()
         self.generate_path()
 
+    def generate_sun(self):
+        with self.canvas:
+            Color(1, 1, 0, 1)
+            planet(pos=(265, 265), size=(70, 70))
+
     def generate_path(self):
-        a = random.randint(40, 300)
-        b = random.randint(40, 300)
+        a = random.randint(50, 300)
+        b = random.randint(50, 300)
         for x in range(-a, a):
             y = ((((a**2)*(b**2)) - ((b**2)*(x**2)))/(a**2))**0.5
             self.draw_path(x, y)
