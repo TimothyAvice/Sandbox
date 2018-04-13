@@ -40,7 +40,7 @@ class Display(Widget):
 
     def draw_path(self, x, y):
         with self.canvas:
-            Color(1, 0, 1, 1)
+            Color(1, 1, 1, 0.5)
             planet(pos=(x + 300, y + 300), size=(1, 1))
             planet(pos=(x + 300, -y + 300), size=(1, 1))
 
