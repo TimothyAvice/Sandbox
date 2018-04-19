@@ -1,0 +1,14 @@
+Display:
+    pos: 0,0
+
+    BoxLayout
+        orientation: 'vertical'
+        Button:
+            text: 'create orb'
+            on_press: root.variables()
+        Button:
+            text: 'Increase speed'
+            on_press: root.change_increment_down()
+        Button:
+            text: 'Decrease speed'
+            on_press: root.change_increment_up()
