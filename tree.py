@@ -27,41 +27,48 @@ class Display(Widget):
     def __init__(self):
         super().__init__()
         self.points = []
-        self.height = 8
-        self.current = []
+        self.length = 30
+        self.angle = 1
         self.initialise()
-        self.event = Clock.schedule_interval(self.generate, 0.1)
-        self.event2 = Clock.schedule_interval(self.draw, 0.1)
+        self.draw()
+        # self.event = Clock.schedule_interval(self.generate, 0.1)
+        # self.event2 = Clock.schedule_interval(self.draw, 0.1)
 
     def initialise(self):
-        y = 0
-        for i in range(self.height+1):
-            new_point = Point(400, 2 + y)
-            self.points.append(new_point)
-            self.current.append(new_point)
-            y += 2
-
-    def draw(self, _):
-        self.canvas.clear()
-        for item in self.points:
-            tree = Tree(pos=(item.x, item.y), size=(2, 2))
-            self.canvas.add(tree)
-            self.current.append(item)
-
-    def generate(self, _):
-        # m = len(self.points)
+        i = 0
         temp_list = []
-        for item in self.points:
-            if self.points.index(item) > (len(self.points) - 7):
-                x = random.randrange(item.x - 4, item.x + 6, 2)
-                y = item.y + 2
-                x2 = random.randrange(item.x - 4, item.x + 6, 2)
-                y2 = item.y + 2
-                new_point = Point(x, y)
-                new_point2 = Point(x2, y2)
-                temp_list.append(new_point)
-                temp_list.append(new_point2)
-        self.points += temp_list
+        while i <= self.length:
+            x = 400
+            y = i
+            i += 2
+            new_point = Point(x, y)
+            temp_list.append(new_point)
+            self.points.append(new_point)
+        for item in temp_list:
+            with self.canvas:
+                branch = Tree(pos=(item.x, item.y), size=(2, 2))
+                self.canvas.add(branch)
+
+    def draw(self):
+        start_x = self.points[len(self.points)-1].x
+        start_y = self.points[len(self.points)-1].y
+        i = 0
+        temp_list = []
+        while i <= self.length:
+            x = start_x + (self.angle + i)
+            y = start_y + i
+            x2 = start_x - (self.angle + i)
+            y2 = start_y + i
+            i += 1
+            new_point = Point(x, y)
+            new_point2 = Point(x2, y2)
+            temp_list.append(new_point)
+            temp_list.append(new_point2)
+        for item in temp_list:
+            with self.canvas:
+                branch = Tree(pos=(item.x, item.y), size=(2, 2))
+                self.canvas.add(branch)
+
 
 
 class Run(App):
