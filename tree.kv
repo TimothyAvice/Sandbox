@@ -1,2 +1,15 @@
 <Display>:
-    pos: 0,0
+    pos: 500, 500
+
+
+    BoxLayout
+        orientation: 'vertical'
+        Button:
+            text: 'create tree'
+            on_press: root.tree()
+        Button:
+            text: 'Stop'
+            on_press: root.stop()
+        Button:
+            text: 'Start'
+            on_press: root.start()
