@@ -33,13 +33,13 @@ public class JFrameLayoutTest extends JFrame {
         JPanel sideButtons = new JPanel(new GridLayout(0,1));
 
         // Test components
-        JLabel info1 = new JLabel("Info1"); JLabel info2 = new JLabel("Info2");
-        JLabel info3 = new JLabel("Info3");
+        JLabel ballCountLabel = new JLabel("Balls: "); JLabel speedLabel = new JLabel("Speed (s): ");
+        JLabel frameRate = new JLabel("Frame rate: ");
         JButton test = new JButton("Test");
-        JButton test2 = new JButton("Test2");
-        JButton test3 = new JButton("Test3");
-        JButton test4 = new JButton("Test4");
-        JButton test5 = new JButton("Test5");
+        JButton addBall = new JButton("Add Ball");
+        JButton clearAll = new JButton("Clear Frame");
+        JButton increaseSpeed = new JButton("|+| Speed");
+        JButton decreaseSpeed = new JButton("|-| Speed");
 
         information.setPreferredSize(new Dimension(getWidth(),40));
         mainPanel.setPreferredSize(new Dimension(1000,800));
@@ -52,9 +52,9 @@ public class JFrameLayoutTest extends JFrame {
         info.add(usage);info.add(help);
 
         // Adding test components
-        information.add(info1); information.add(info2); information.add(info3);
+        information.add(ballCountLabel); information.add(speedLabel); information.add(frameRate);
         mainPanel.add(test);
-        sideButtons.add(test2);sideButtons.add(test3);sideButtons.add(test4);sideButtons.add(test5);
+        sideButtons.add(addBall);sideButtons.add(clearAll);sideButtons.add(increaseSpeed);sideButtons.add(decreaseSpeed);
 
         add(mainPanel, BorderLayout.CENTER);
         add(information, BorderLayout.SOUTH);
@@ -78,7 +78,7 @@ public class JFrameLayoutTest extends JFrame {
             }
         });
 
-        // Moving shapes
+        // Moving balls
 
 
         pack();
