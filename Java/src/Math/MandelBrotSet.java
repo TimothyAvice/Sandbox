@@ -45,10 +45,11 @@ public class MandelBrotSet extends JPanel implements ChangeListener {
         xoffset.addChangeListener(this);
         yoffset.addChangeListener(this);
 
+        // Drawing the set
         renderMandelBrotSet();
-
         repaint();
 
+        // Setting up the frame
         JFrame jFrame = new JFrame("MandelBrotSet");
         jFrame.setLayout(new BorderLayout());
         jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

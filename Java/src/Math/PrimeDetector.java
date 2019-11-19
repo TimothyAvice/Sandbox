@@ -21,7 +21,7 @@ public class PrimeDetector {
     public static void main(String[] args) {
         double number = -1;
         number = getNumber(number);
-        while(number != 0) {
+        while(number != 0 && number != 1) {
             number = getNumber(number);
         }
         JOptionPane.showMessageDialog(null, "Closing");
@@ -36,7 +36,7 @@ public class PrimeDetector {
             JOptionPane.showMessageDialog(null, "Input Error");
             System.exit(0);
         }
-        if(number != 0) {
+        if(number != 0 && number != 1) {
             new PrimeDetector(number);
         }
         return number;
