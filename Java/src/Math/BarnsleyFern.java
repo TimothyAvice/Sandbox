@@ -39,7 +39,7 @@ public class BarnsleyFern extends JPanel{
             }
             x = tmpx;
             y = tmpy;
-            
+
             img.setRGB((int) Math.round(w / 2f + x * w / 11),
                     (int) Math.round(h - y * h / 11), 0xFF32CD32);
         }
